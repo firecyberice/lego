@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run --rm -t -e CGO_ENABLED=0 -e GOARCH=arm -v $(pwd):/data golang:1.8 bash -c "go get -v -d github.com/xenolf/lego && cd \$GOPATH/src/github.com/xenolf/lego && go get -v -d ./... && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego"
+chmod a+x lego
+#docker run --rm -v $(pwd)/certs:/data --entrypoint /bin/sh alpine:3.5 -c "apk add -U ca-certificates && cp /etc/ssl/certs/ca-certificates.crt /data/ca-certificates.crt"
