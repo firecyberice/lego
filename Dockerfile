@@ -1,5 +1,5 @@
 FROM scratch
-COPY lego-amd64 /lego
+COPY lego /lego
 EXPOSE 80 443
 ENTRYPOINT ["/lego"]
 CMD ["-h"]

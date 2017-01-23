@@ -17,15 +17,12 @@ function compile(){
   "go get -v -d github.com/xenolf/lego \
   && cd \$GOPATH/src/github.com/xenolf/lego \
   && go get -v -d ./... \
-  && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego-\$GOARCH"
+  && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego"
 }
 
 # Compile for different GOARCHS
-echo "=> Building the binary for arm"
-compile arm
-
-echo "=> Building the binary for amd64"
-compile amd64
+ARCH=${DOCKER_TAG##latest-}
+compile $ARCH
 
 # Make the result executable
 chmod a+x lego-*

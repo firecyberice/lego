@@ -1,5 +1,0 @@
-FROM scratch
-COPY lego-arm /lego
-EXPOSE 80 443
-ENTRYPOINT ["/lego"]
-CMD ["-h"]
