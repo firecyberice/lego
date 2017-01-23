@@ -1,6 +1,7 @@
 #!/bin/bash
 
-function get_ca-cert(){
+function get_ca_cert(){
+  mkdir -p etc/ssl/certs
   docker run --rm \
   -v $(pwd)/etc/ssl/certs:/data \
   alpine:3.5 sh -c \
@@ -25,7 +26,5 @@ ARCH=${DOCKER_TAG##latest-}
 compile $ARCH
 
 get_ca_cert
-
-# Make the result executable
-chmod a+x lego-*
+chmod a+x lego
 ls -lA
