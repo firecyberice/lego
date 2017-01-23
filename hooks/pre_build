@@ -9,9 +9,9 @@ function get_ca-cert(){
 }
 
 function compile(){
-  local GOARCH="${1}"
+  local ARCH="${1}"
   docker run --rm -t \
-  -e GOARCH -e CGO_ENABLED=0 \
+  -e GOARCH=$ARCH -e CGO_ENABLED=0 \
   -v $(pwd):/data \
   golang:1.8 bash -c \
   "go get -v -d github.com/xenolf/lego \
@@ -21,8 +21,12 @@ function compile(){
 }
 
 # Compile for different GOARCHS
+echo "=> Building the binary for arm"
 compile arm
+
+echo "=> Building the binary for amd64"
 compile amd64
 
 # Make the result executable
 chmod a+x lego-*
+ls -lA
