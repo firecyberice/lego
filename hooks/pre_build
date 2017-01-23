@@ -1,9 +1,8 @@
 #!/bin/bash
 
 function get_ca_cert(){
-  mkdir -p etc/ssl/certs
   docker run --rm \
-  -v $(pwd)/etc/ssl/certs:/data \
+  -v $(pwd)/content/etc/ssl/certs:/data \
   alpine:3.5 sh -c \
   "apk add -U ca-certificates \
   && cp /etc/ssl/certs/ca-certificates.crt /data/ca-certificates.crt"
@@ -13,13 +12,16 @@ function compile(){
   local ARCH="${1}"
   docker run --rm -t \
   -e GOARCH=$ARCH -e CGO_ENABLED=0 \
-  -v $(pwd):/data \
+  -v $(pwd)/content:/data \
   golang:1.8 bash -c \
   "go get -v -d github.com/xenolf/lego \
   && cd \$GOPATH/src/github.com/xenolf/lego \
   && go get -v -d ./... \
   && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego"
 }
+
+
+mkdir -p content/etc/ssl/certs
 
 # Compile for different GOARCHS
 ARCH=${DOCKER_TAG##latest-}
