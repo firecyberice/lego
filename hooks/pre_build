@@ -2,7 +2,7 @@
 
 function get_ca-cert(){
   docker run --rm \
-  -v $(pwd)/certs:/data \
+  -v $(pwd)/etc/ssl/certs:/data \
   alpine:3.5 sh -c \
   "apk add -U ca-certificates \
   && cp /etc/ssl/certs/ca-certificates.crt /data/ca-certificates.crt"
@@ -23,6 +23,8 @@ function compile(){
 # Compile for different GOARCHS
 ARCH=${DOCKER_TAG##latest-}
 compile $ARCH
+
+get_ca_cert
 
 # Make the result executable
 chmod a+x lego-*
