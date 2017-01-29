@@ -24,7 +24,7 @@ function compile(){
 mkdir -p content/etc/ssl/certs
 
 # Compile for different GOARCHS
-ARCH=${DOCKER_TAG##latest-}
+ARCH=${DOCKER_TAG}
 compile $ARCH
 
 get_ca_cert
