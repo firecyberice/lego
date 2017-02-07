@@ -10,7 +10,7 @@ chmod +x ./manifest-tool
 echo "==> push multiarch"
 
 VERSION="latest"
-
+ARCH="linux/arm,linux/amd64"
 ./manifest-tool push from-args \
 --platforms ${ARCH} \
 --template ${DOCKER_REPO}:${VERSION}-OS-ARCH \
