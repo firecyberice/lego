@@ -6,8 +6,12 @@ URL=https://github.com/estesp/manifest-tool/releases/download/v0.3.0/manifest-to
 curl -sLo ./manifest-tool ${URL}
 chmod +x ./manifest-tool
 
+
 echo "==> push multiarch"
-./manifest-tool push from-spec lego-manifest.yml
 
-#./manifest-tool push from-args \
+VERSION="latest"
 
+./manifest-tool push from-args \
+--platforms ${ARCH} \
+--template ${DOCKER_REPO}:${VERSION}-OS-ARCH \
+--target ${DOCKER_REPO}:${VERSION}

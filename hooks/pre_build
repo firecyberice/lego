@@ -9,24 +9,20 @@ function get_ca_cert(){
 }
 
 function compile(){
-  local ARCH="${1}"
   docker run --rm -t \
-  -e GOARCH=$ARCH -e CGO_ENABLED=0 \
-  -v $(pwd)/content:/data \
+  -e GOARCH=$DOCKER_TAG \
+  -e CGO_ENABLED=0 \
+  -v $(pwd):/data \
   golang:1.8 bash -c \
   "go get -v -d github.com/xenolf/lego \
   && cd \$GOPATH/src/github.com/xenolf/lego \
   && go get -v -d ./... \
-  && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego"
+  && go build -a --installsuffix cgo --ldflags='-s' -o /data/lego-\$GOARCH"
 }
 
-
 mkdir -p content/etc/ssl/certs
-
-# Compile for different GOARCHS
-ARCH=${DOCKER_TAG}
-compile $ARCH
-
 get_ca_cert
-chmod a+x lego
-ls -lA
+
+echo "==> Compile for different GOARCH"
+compile ${DOCKER_TAG}
+chmod a+x lego-${DOCKER_TAG}
