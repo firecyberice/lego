@@ -1,0 +1,10 @@
+image: firecyberice/lego:latest
+manifests:
+  - image: firecyberice/lego:amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: firecyberice/lego:arm
+    platform:
+      architecture: arm
+      os: linux
