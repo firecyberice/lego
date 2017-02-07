@@ -1,6 +1,8 @@
 #!/bin/bash
-OS="linux"
-VERSION="latest"
 
-docker build --build-arg ARCH=$DOCKER_TAG -t ${DOCKER_REPO}:${VERSION}-${OS}-${DOCKER_TAG} .
+#OS="linux"
+#VERSION="latest"
+#docker build --build-arg ARCH=$DOCKER_TAG -t ${DOCKER_REPO}:${VERSION}-${OS}-${DOCKER_TAG} .
+
+docker build --build-arg ARCH=$DOCKER_TAG -t ${DOCKER_REPO}:${DOCKER_TAG} .
 
