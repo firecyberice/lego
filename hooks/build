@@ -4,5 +4,17 @@
 #VERSION="latest"
 #docker build --build-arg ARCH=$DOCKER_TAG -t ${DOCKER_REPO}:${VERSION}-${OS}-${DOCKER_TAG} .
 
-docker build --build-arg ARCH=$DOCKER_TAG -t ${DOCKER_REPO}:${DOCKER_TAG} .
+
+if [[ "${DOCKER_TAG}" == "arm" ]]; then
+  tmp="arm7"
+else
+  tmp="${DOCKER_TAG}"
+fi
+
+VERSION="0.4.0"
+URL="https://github.com/xenolf/lego/releases/download/v${VERSION}/lego_linux_${tmp}.tar.xz"
+curl -sL "${URL}" | tar -xJ "lego_linux_${tmp}"
+mv "lego_linux_${tmp}" "lego-${DOCKER_TAG}"
+
+docker build --build-arg ARCH=${DOCKER_TAG} -t "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}" .
 
