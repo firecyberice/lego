@@ -1,5 +1,5 @@
 #!/bin/bash
 
 VERSION="$(cat VERSION)"
-docker image push "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}" .
+docker image push "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}"
 
