@@ -9,7 +9,7 @@ chmod +x ./manifest-tool
 
 echo "==> push multiarch"
 
-VERSION="0.4.0"
+VERSION="$(cat VERSION)"
 ARCH="linux/arm,linux/amd64"
 
 ./manifest-tool push from-args \

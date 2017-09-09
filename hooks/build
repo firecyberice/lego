@@ -11,7 +11,7 @@ else
   tmp="${DOCKER_TAG}"
 fi
 
-VERSION="0.4.0"
+VERSION="$(cat VERSION)"
 URL="https://github.com/xenolf/lego/releases/download/v${VERSION}/lego_linux_${tmp}.tar.xz"
 curl -sL "${URL}" | tar -xJ "lego_linux_${tmp}"
 mv "lego_linux_${tmp}" "lego-${DOCKER_TAG}"
