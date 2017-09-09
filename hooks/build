@@ -16,5 +16,5 @@ URL="https://github.com/xenolf/lego/releases/download/v${VERSION}/lego_linux_${t
 curl -sL "${URL}" | tar -xJ "lego_linux_${tmp}"
 mv "lego_linux_${tmp}" "lego-${DOCKER_TAG}"
 
-docker build --build-arg ARCH=${DOCKER_TAG} -t "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}" .
+docker image build --build-arg ARCH=${DOCKER_TAG} -t "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}" .
 

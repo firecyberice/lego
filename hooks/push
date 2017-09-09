@@ -1,0 +1,5 @@
+#!/bin/bash
+
+VERSION="0.4.0"
+docker image push "${DOCKER_REPO}:${VERSION}-${DOCKER_TAG}" .
+

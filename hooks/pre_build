@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_ca_cert(){
-  docker run --rm \
+  docker container run --rm \
   -v $(pwd)/content/etc/ssl/certs:/data \
   alpine:3.6 sh -c \
   "apk add -U ca-certificates \
@@ -9,7 +9,7 @@ function get_ca_cert(){
 }
 
 function compile(){
-  docker run --rm -t \
+  docker container run --rm -t \
   -e GOARCH=$DOCKER_TAG \
   -e CGO_ENABLED=0 \
   -v $(pwd):/data \
